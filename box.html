@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title></title>
+  <style>
+  body {
+  background: #222;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.view {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  perspective: 200;
+}
+
+.plane {
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 150px;
+  height: 150px;
+  transform-style: preserve-3d;
+  transform: rotateX(45deg) rotateZ(30deg);
+  -webkit-animation: rotate 8s infinite linear;
+          animation: rotate 8s infinite linear;
+}
+
+.box {
+  width: 30px;
+  height: 30px;
+  transform-style: preserve-3d;
+  float: left;
+  -webkit-animation: up 2s infinite alternate ease-in-out;
+          animation: up 2s infinite alternate ease-in-out;
+}
+.box .face {
+  position: absolute;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.box .face.bottom {
+  transform: translateZ(-15px);
+  width: 100%;
+  height: 100%;
+}
+.box .face.top {
+  transform: translateZ(15px);
+  width: 100%;
+  height: 100%;
+}
+.box .face.right {
+  transform: translateZ(-15px) rotateY(-90deg);
+  transform-origin: left;
+  left: 100%;
+  width: 30px;
+  height: 100%;
+}
+.box .face.left {
+  transform: translateZ(-15px) rotateY(90deg);
+  transform-origin: right;
+  right: 100%;
+  width: 30px;
+  height: 100%;
+}
+.box .face.front {
+  transform: translateZ(-15px) rotateX(90deg);
+  transform-origin: top;
+  top: 100%;
+  width: 100%;
+  height: 30px;
+}
+.box .face.back {
+  transform: translateZ(-15px) rotateX(-90deg);
+  transform-origin: bottom;
+  bottom: 100%;
+  width: 100%;
+  height: 30px;
+}
+.box:nth-child(1) {
+  -webkit-animation-delay: -0.08s;
+          animation-delay: -0.08s;
+}
+.box:nth-child(2) {
+  -webkit-animation-delay: -0.16s;
+          animation-delay: -0.16s;
+}
+.box:nth-child(3) {
+  -webkit-animation-delay: -0.24s;
+          animation-delay: -0.24s;
+}
+.box:nth-child(4) {
+  -webkit-animation-delay: -0.32s;
+          animation-delay: -0.32s;
+}
+.box:nth-child(5) {
+  -webkit-animation-delay: -0.4s;
+          animation-delay: -0.4s;
+}
+.box:nth-child(6) {
+  -webkit-animation-delay: -0.16s;
+          animation-delay: -0.16s;
+}
+.box:nth-child(7) {
+  -webkit-animation-delay: -0.32s;
+          animation-delay: -0.32s;
+}
+.box:nth-child(8) {
+  -webkit-animation-delay: -0.48s;
+          animation-delay: -0.48s;
+}
+.box:nth-child(9) {
+  -webkit-animation-delay: -0.64s;
+          animation-delay: -0.64s;
+}
+.box:nth-child(10) {
+  -webkit-animation-delay: -0.8s;
+          animation-delay: -0.8s;
+}
+.box:nth-child(11) {
+  -webkit-animation-delay: -0.24s;
+          animation-delay: -0.24s;
+}
+.box:nth-child(12) {
+  -webkit-animation-delay: -0.48s;
+          animation-delay: -0.48s;
+}
+.box:nth-child(13) {
+  -webkit-animation-delay: -0.72s;
+          animation-delay: -0.72s;
+}
+.box:nth-child(14) {
+  -webkit-animation-delay: -0.96s;
+          animation-delay: -0.96s;
+}
+.box:nth-child(15) {
+  -webkit-animation-delay: -1.2s;
+          animation-delay: -1.2s;
+}
+.box:nth-child(16) {
+  -webkit-animation-delay: -0.32s;
+          animation-delay: -0.32s;
+}
+.box:nth-child(17) {
+  -webkit-animation-delay: -0.64s;
+          animation-delay: -0.64s;
+}
+.box:nth-child(18) {
+  -webkit-animation-delay: -0.96s;
+          animation-delay: -0.96s;
+}
+.box:nth-child(19) {
+  -webkit-animation-delay: -1.28s;
+          animation-delay: -1.28s;
+}
+.box:nth-child(20) {
+  -webkit-animation-delay: -1.6s;
+          animation-delay: -1.6s;
+}
+.box:nth-child(21) {
+  -webkit-animation-delay: -0.4s;
+          animation-delay: -0.4s;
+}
+.box:nth-child(22) {
+  -webkit-animation-delay: -0.8s;
+          animation-delay: -0.8s;
+}
+.box:nth-child(23) {
+  -webkit-animation-delay: -1.2s;
+          animation-delay: -1.2s;
+}
+.box:nth-child(24) {
+  -webkit-animation-delay: -1.6s;
+          animation-delay: -1.6s;
+}
+.box:nth-child(25) {
+  -webkit-animation-delay: -2s;
+          animation-delay: -2s;
+}
+.box .face {
+  background: rgba(220, 20, 60, 0.4);
+}
+.box:hover > div {
+  box-shadow: inset 0 0 0 1px white;
+}
+.box:hover > div:hover {
+  box-shadow: inset 0 0 0 4px white;
+}
+
+@-webkit-keyframes rotate {
+  0% {
+    transform: rotateX(45deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateX(45deg) rotateZ(360deg);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotateX(45deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateX(45deg) rotateZ(360deg);
+  }
+}
+@-webkit-keyframes up {
+  0% {
+    transform: translateZ(0);
+  }
+  100% {
+    transform: translateZ(60px);
+  }
+}
+@keyframes up {
+  0% {
+    transform: translateZ(0);
+  }
+  100% {
+    transform: translateZ(60px);
+  }
+}
+  </style>
+</head>
+<body>
+<div class="view">
+  <div class="plane">
+    <div class="box">
+      <div class="face front">
+        <!--.inner front-->
+      </div>
+      <div class="face back">
+        <!--.inner back-->
+      </div>
+      <div class="face top">
+        <!--.inner top-->
+      </div>
+      <div class="face bottom">
+        <!--.inner bottom-->
+      </div>
+      <div class="face left">
+        <!--.inner left-->
+      </div>
+      <div class="face right">
+        <!--.inner right-->
+      </div>
+    </div>
+    <div class="box">
+      <div class="face front">
+        <!--.inner front-->
+      </div>
+      <div class="face back">
+        <!--.inner back-->
+      </div>
+      <div class="face top">
+        <!--.inner top-->
+      </div>
+      <div class="face bottom">
+        <!--.inner bottom-->
+      </div>
+      <div class="face left">
+        <!--.inner left-->
+      </div>
+      <div class="face right">
+        <!--.inner right-->
+      </div>
+    </div>
+    <div class="box">
+      <div class="face front">
+        <!--.inner front-->
+      </div>
+      <div class="face back">
+        <!--.inner back-->
+      </div>
+      <div class="face top">
+        <!--.inner top-->
+      </div>
+      <div class="face bottom">
+        <!--.inner bottom-->
+      </div>
+      <div class="face left">
+        <!--.inner left-->
+      </div>
+      <div class="face right">
+        <!--.inner right-->
+      </div>
+    </div>
+    <div class="box">
+      <div class="face front">
+        <!--.inner front-->
+      </div>
+      <div class="face back">
+        <!--.inner back-->
+      </div>
+      <div class="face top">
+        <!--.inner top-->
+      </div>
+      <div class="face bottom">
+        <!--.inner bottom-->
+      </div>
+      <div class="face left">
+        <!--.inner left-->
+      </div>
+      <div class="face right">
+        <!--.inner right-->
+      </div>
+    </div>
+    <div class="box">
+      <div class="face front">
+        <!--.inner front-->
+      </div>
+      <div class="face back">
+        <!--.inner back-->
+      </div>
+      <div class="face top">
+        <!--.inner top-->
+      </div>
+      <div class="face bottom">
+        <!--.inner bottom-->
+      </div>
+      <div class="face left">
+        <!--.inner left-->
+      </div>
+      <div class="face right">
+        <!--.inner right-->
+      </div>
+    </div>
+    <div class="box">
+      <div class="face front">
+        <!--.inner front-->
+      </div>
+      <div class="face back">
+        <!--.inner back-->
+      </div>
+      <div class="face top">
+        <!--.inner top-->
+      </div>
+      <div class="face bottom">
+        <!--.inner bottom-->
+      </div>
+      <div class="face left">
+        <!--.inner left-->
+      </div>
+      <div class="face right">
+        <!--.inner right-->
+      </div>
+    </div>
+    <div class="box">
+      <div class="face front">
+        <!--.inner front-->
+      </div>
+      <div class="face back">
+        <!--.inner back-->
+      </div>
+      <div class="face top">
+        <!--.inner top-->
+      </div>
+      <div class="face bottom">
+        <!--.inner bottom-->
+      </div>
+      <div class="face left">
+        <!--.inner left-->
+      </div>
+      <div class="face right">
+        <!--.inner right-->
+      </div>
+    </div>
+    <div class="box">
+      <div class="face front">
+        <!--.inner front-->
+      </div>
+      <div class="face back">
+        <!--.inner back-->
+      </div>
+      <div class="face top">
+        <!--.inner top-->
+      </div>
+      <div class="face bottom">
+        <!--.inner bottom-->
+      </div>
+      <div class="face left">
+        <!--.inner left-->
+      </div>
+      <div class="face right">
+        <!--.inner right-->
+      </div>
+    </div>
+    <div class="box">
+      <div class="face front">
+        <!--.inner front-->
+      </div>
+      <div class="face back">
+        <!--.inner back-->
+      </div>
+      <div class="face top">
+        <!--.inner top-->
+      </div>
+      <div class="face bottom">
+        <!--.inner bottom-->
+      </div>
+      <div class="face left">
+        <!--.inner left-->
+      </div>
+      <div class="face right">
+        <!--.inner right-->
+      </div>
+    </div>
+    <div class="box">
+      <div class="face front">
+        <!--.inner front-->
+      </div>
+      <div class="face back">
+        <!--.inner back-->
+      </div>
+      <div class="face top">
+        <!--.inner top-->
+      </div>
+      <div class="face bottom">
+        <!--.inner bottom-->
+      </div>
+      <div class="face left">
+        <!--.inner left-->
+      </div>
+      <div class="face right">
+        <!--.inner right-->
+      </div>
+    </div>
+    <div class="box">
+      <div class="face front">
+        <!--.inner front-->
+      </div>
+      <div class="face back">
+        <!--.inner back-->
+      </div>
+      <div class="face top">
+        <!--.inner top-->
+      </div>
+      <div class="face bottom">
+        <!--.inner bottom-->
+      </div>
+      <div class="face left">
+        <!--.inner left-->
+      </div>
+      <div class="face right">
+        <!--.inner right-->
+      </div>
+    </div>
+    <div class="box">
+      <div class="face front">
+        <!--.inner front-->
+      </div>
+      <div class="face back">
+        <!--.inner back-->
+      </div>
+      <div class="face top">
+        <!--.inner top-->
+      </div>
+      <div class="face bottom">
+        <!--.inner bottom-->
+      </div>
+      <div class="face left">
+        <!--.inner left-->
+      </div>
+      <div class="face right">
+        <!--.inner right-->
+      </div>
+    </div>
+    <div class="box">
+      <div class="face front">
+        <!--.inner front-->
+      </div>
+      <div class="face back">
+        <!--.inner back-->
+      </div>
+      <div class="face top">
+        <!--.inner top-->
+      </div>
+      <div class="face bottom">
+        <!--.inner bottom-->
+      </div>
+      <div class="face left">
+        <!--.inner left-->
+      </div>
+      <div class="face right">
+        <!--.inner right-->
+      </div>
+    </div>
+    <div class="box">
+      <div class="face front">
+        <!--.inner front-->
+      </div>
+      <div class="face back">
+        <!--.inner back-->
+      </div>
+      <div class="face top">
+        <!--.inner top-->
+      </div>
+      <div class="face bottom">
+        <!--.inner bottom-->
+      </div>
+      <div class="face left">
+        <!--.inner left-->
+      </div>
+      <div class="face right">
+        <!--.inner right-->
+      </div>
+    </div>
+    <div class="box">
+      <div class="face front">
+        <!--.inner front-->
+      </div>
+      <div class="face back">
+        <!--.inner back-->
+      </div>
+      <div class="face top">
+        <!--.inner top-->
+      </div>
+      <div class="face bottom">
+        <!--.inner bottom-->
+      </div>
+      <div class="face left">
+        <!--.inner left-->
+      </div>
+      <div class="face right">
+        <!--.inner right-->
+      </div>
+    </div>
+    <div class="box">
+      <div class="face front">
+        <!--.inner front-->
+      </div>
+      <div class="face back">
+        <!--.inner back-->
+      </div>
+      <div class="face top">
+        <!--.inner top-->
+      </div>
+      <div class="face bottom">
+        <!--.inner bottom-->
+      </div>
+      <div class="face left">
+        <!--.inner left-->
+      </div>
+      <div class="face right">
+        <!--.inner right-->
+      </div>
+    </div>
+    <div class="box">
+      <div class="face front">
+        <!--.inner front-->
+      </div>
+      <div class="face back">
+        <!--.inner back-->
+      </div>
+      <div class="face top">
+        <!--.inner top-->
+      </div>
+      <div class="face bottom">
+        <!--.inner bottom-->
+      </div>
+      <div class="face left">
+        <!--.inner left-->
+      </div>
+      <div class="face right">
+        <!--.inner right-->
+      </div>
+    </div>
+    <div class="box">
+      <div class="face front">
+        <!--.inner front-->
+      </div>
+      <div class="face back">
+        <!--.inner back-->
+      </div>
+      <div class="face top">
+        <!--.inner top-->
+      </div>
+      <div class="face bottom">
+        <!--.inner bottom-->
+      </div>
+      <div class="face left">
+        <!--.inner left-->
+      </div>
+      <div class="face right">
+        <!--.inner right-->
+      </div>
+    </div>
+    <div class="box">
+      <div class="face front">
+        <!--.inner front-->
+      </div>
+      <div class="face back">
+        <!--.inner back-->
+      </div>
+      <div class="face top">
+        <!--.inner top-->
+      </div>
+      <div class="face bottom">
+        <!--.inner bottom-->
+      </div>
+      <div class="face left">
+        <!--.inner left-->
+      </div>
+      <div class="face right">
+        <!--.inner right-->
+      </div>
+    </div>
+    <div class="box">
+      <div class="face front">
+        <!--.inner front-->
+      </div>
+      <div class="face back">
+        <!--.inner back-->
+      </div>
+      <div class="face top">
+        <!--.inner top-->
+      </div>
+      <div class="face bottom">
+        <!--.inner bottom-->
+      </div>
+      <div class="face left">
+        <!--.inner left-->
+      </div>
+      <div class="face right">
+        <!--.inner right-->
+      </div>
+    </div>
+    <div class="box">
+      <div class="face front">
+        <!--.inner front-->
+      </div>
+      <div class="face back">
+        <!--.inner back-->
+      </div>
+      <div class="face top">
+        <!--.inner top-->
+      </div>
+      <div class="face bottom">
+        <!--.inner bottom-->
+      </div>
+      <div class="face left">
+        <!--.inner left-->
+      </div>
+      <div class="face right">
+        <!--.inner right-->
+      </div>
+    </div>
+    <div class="box">
+      <div class="face front">
+        <!--.inner front-->
+      </div>
+      <div class="face back">
+        <!--.inner back-->
+      </div>
+      <div class="face top">
+        <!--.inner top-->
+      </div>
+      <div class="face bottom">
+        <!--.inner bottom-->
+      </div>
+      <div class="face left">
+        <!--.inner left-->
+      </div>
+      <div class="face right">
+        <!--.inner right-->
+      </div>
+    </div>
+    <div class="box">
+      <div class="face front">
+        <!--.inner front-->
+      </div>
+      <div class="face back">
+        <!--.inner back-->
+      </div>
+      <div class="face top">
+        <!--.inner top-->
+      </div>
+      <div class="face bottom">
+        <!--.inner bottom-->
+      </div>
+      <div class="face left">
+        <!--.inner left-->
+      </div>
+      <div class="face right">
+        <!--.inner right-->
+      </div>
+    </div>
+    <div class="box">
+      <div class="face front">
+        <!--.inner front-->
+      </div>
+      <div class="face back">
+        <!--.inner back-->
+      </div>
+      <div class="face top">
+        <!--.inner top-->
+      </div>
+      <div class="face bottom">
+        <!--.inner bottom-->
+      </div>
+      <div class="face left">
+        <!--.inner left-->
+      </div>
+      <div class="face right">
+        <!--.inner right-->
+      </div>
+    </div>
+    <div class="box">
+      <div class="face front">
+        <!--.inner front-->
+      </div>
+      <div class="face back">
+        <!--.inner back-->
+      </div>
+      <div class="face top">
+        <!--.inner top-->
+      </div>
+      <div class="face bottom">
+        <!--.inner bottom-->
+      </div>
+      <div class="face left">
+        <!--.inner left-->
+      </div>
+      <div class="face right">
+        <!--.inner right-->
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
