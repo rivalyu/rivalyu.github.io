@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=0.9">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title></title>
+  <style type="text/css" media="all">
+  body {
+    font-family: Courier;
+  }
+    #query{
+      height: 25px;
+      border: 1px solid #ddd;
+      border-radius: 2px;
+      padding-left: 3px;
+    }
+    #start {
+      height: 25px;
+      width: 50px;
+      border: 1px solid #ddd;
+      border-radius: 2px;
+      padding-left: 3px;
+    }
+    #num {
+      height: 25px;
+      width: 50px;
+      padding-left: 3px;
+      border: 1px solid #ddd;
+      border-radius: 2px;
+    }
+    button {
+      height: 30px;
+      border: 1px solid white;
+      border-radius: 2px;
+      background: #444;
+      color: #eee;
+    }
+    h3 {
+      font-family: Courier;
+    }
+    p{
+      font-family: Courier;
+      font-size: 10px;
+    }
+  </style>
+</head>
+<body>
+  
+  <h3>dorking tools</h3>
+  <table>
+   <tr>
+     <td>query</th>
+     <td>page</th>
+     <td>total</th>
+   </tr>
+   <tr>
+     <td>
+       
+  <input type="text" id="query" placeholder="query">
+     </td>
+     <td>
+       
+  <input type="number" id="start" placeholder="page">
+     </td>
+     <td>
+       
+  <input type="number" id="num" placeholder="total">
+     </td>
+     <td>
+       
+  <button type="submit" onclick="valid()" id="submit">Execute</button>
+     </td>
+   </tr>
+  </table>
+<p>note: sebelum memakai tools ini anda diwajibkan untuk coly terlebih dahulu.</p>
+<script>
+function valid(){
+  var query = document.getElementById("query").value;
+  var page = document.getElementById("start").value;
+  var total = document.getElementById("num").value;
+  var querys = query.replace(" ", "+");
+  document.location.href = "https://www.google.com/search?q="+querys+"&start="+page+"&num="+total;
+ 
+}
+</script>
+</body>
+</html>
